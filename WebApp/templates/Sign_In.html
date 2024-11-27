@@ -1,0 +1,78 @@
+
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Form-v7 by Colorlib</title>
+	<!-- Mobile Specific Metas -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<!-- Font-->
+	<link rel="stylesheet" type="text/css" href="{% static 'admin/css/opensans-font.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'admin/fonts/line-awesome/css/line-awesome.min.css' %}">
+	<!-- Jquery -->
+	<link rel="stylesheet" href="https://jqueryvalidation.org/files/demo/site-demos.css">
+	<!-- Main Style Css -->
+    <link rel="stylesheet" href="{% static 'admin/css/style.css' %}"/>
+</head>
+<body class="form-v7">
+	<div class="page-content">
+		<div class="form-v7-content">
+			<div class="form-left">
+				<img src="{% static 'admin/images/gourmet-italian-bolognese-pasta-with-fresh-parmesan-generated-by-ai_188544-9453.avif' %}" style="height:500px;margin-top:-12px" alt="form">
+				<p class="text-1">Log In</p>
+				<p class="text-2">Privacy policy & Term of service</p>
+			</div>
+			<form class="form-detail" action="{% url 'user_login' %}" method="post" id="myform" style="padding-top:100px;margin-top:20px;height:360px">
+				{% csrf_token %}
+				<div class="form-row">
+					<label for="username">NAME</label>
+					<input type="text" name="username" id="username" class="input-text">
+				</div>
+<!--				<div class="form-row">-->
+<!--					<label for="your_email">E-MAIL</label>-->
+<!--					<input type="text" name="your_email" id="your_email" class="input-text" required pattern="[^@]+@[^@]+.[a-zA-Z]{2,6}">-->
+<!--				</div>-->
+				<div class="form-row">
+					<label for="password">PASSWORD</label>
+					<input type="password" name="password" id="password" class="input-text" required>
+				</div>
+<!--				<div class="form-row">-->
+<!--					<label for="comfirm_password">CONFIRM PASSWORD</label>-->
+<!--					<input type="password" name="comfirm_password" id="comfirm_password" class="input-text" required>-->
+<!--				</div>-->
+				<div class="form-row-last">
+					<input type="submit" name="register" class="register" value="Login">
+					<p>Or<a href="{% url 'sign_page' %}">Create an account?</a></p>
+				</div>
+			</form>
+		</div>
+	</div>
+	<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+		{% if messages %}
+			{% for i in messages %}
+			   {% if i.tags == 'success' %}
+				   <script>
+					   swal('{{i}}','','success')
+				   </script>
+			   {% elif i.tags == 'error' %}
+				   <script>
+					   swal('{{i}}','','error')
+				   </script>
+			   {% elif i.tags == 'warning' %}
+				   <script>
+					   swal('{{i}}','','warning')
+				   </script>
+			   {% else %}
+				   <script>
+					   swal('{{i}}','','info')
+				   </script>
+			   {% endif %}
+			{% endfor %}
+		{% endif %}
+</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+</html>
+

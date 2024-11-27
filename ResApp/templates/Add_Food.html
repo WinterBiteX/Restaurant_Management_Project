@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+{% extends 'index.html' %}
+{% block content %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="pd-20 card-box mb-30">
+					<div class="clearfix">
+						<div class="pull-left">
+							<h4 class="text-blue h4">Add Food Details Here</h4>
+						</div>
+					</div>
+					<form method = "post" action = "{% url 'save_food' %}" enctype="multipart/form-data">
+						{% csrf_token %}
+						<div class="form-group">
+							<label>Food styles</label>
+							<select name="style" class="form-control">
+								{% for i in data %}
+								<option>{{i.Food_Style}}</option>
+								{% endfor %}
+							</select>
+						</div>
+						<div class="form-group">
+							<label>Food Name</label>
+							<input name="fname" class="form-control" type="text" placeholder="Food Name">
+						</div>
+						<div class="form-group">
+							<label>Description</label>
+							<textarea name="description" type="text" class="form-control" placeholder="Description"></textarea>
+						</div>
+						<div class="form-group">
+							<label>Quantity</label>
+							<input name="quantity" type="text" class="form-control" value="" placeholder="Quantity">
+						</div>
+						<div class="form-group">
+							<label>MRP</label>
+							<input name="mrp" class="form-control" value="" type="text" placeholder="MRP">
+						</div>
+						<div class="form-group">
+							<label>Image1</label>
+							<input name="img1" type="file" class="form-control-file form-control height-auto">
+						</div>
+						<div class="form-group">
+							<label>Image2</label>
+							<input name="img2" type="file" class="form-control-file form-control height-auto">
+						</div>
+						<div class="mb-3">
+							<button type="submit" class="btn btn-success">Submit</button>
+						</div>
+					</form>
+				</div>
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+	{% if messages %}
+		{% for i in messages %}
+		   {% if i.tags == 'success' %}
+			   <script>
+				   swal('{{i}}','','success')
+			   </script>
+		   {% elif i.tags == 'error' %}
+			   <script>
+				   swal('{{i}}','','error')
+			   </script>
+		   {% elif i.tags == 'warning' %}
+			   <script>
+				   swal('{{i}}','','warning')
+			   </script>
+		   {% else %}
+			   <script>
+				   swal('{{i}}','','info')
+			   </script>
+		   {% endif %}
+		{% endfor %}
+	{% endif %}
+</body>
+</html>
+{% endblock %}

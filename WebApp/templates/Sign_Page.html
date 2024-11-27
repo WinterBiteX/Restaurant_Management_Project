@@ -1,0 +1,107 @@
+
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Form-v7 by Colorlib</title>
+	<!-- Mobile Specific Metas -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<!-- Font-->
+	<link rel="stylesheet" type="text/css" href="{% static 'admin/css/opensans-font.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'admin/fonts/line-awesome/css/line-awesome.min.css' %}">
+	<!-- Jquery -->
+	<link rel="stylesheet" href="https://jqueryvalidation.org/files/demo/site-demos.css">
+	<!-- Main Style Css -->
+    <link rel="stylesheet" href="{% static 'admin/css/style.css' %}"/>
+</head>
+<body class="form-v7">
+	<div class="page-content">
+		<div class="form-v7-content">
+			<div class="form-left">
+				<img src="{% static 'admin/images/4k-restaurant-food-menu-burger-pizza-cake-food-menu-ultra-hd-ai-generated-image_669273-215.avif' %}" style="height:700px;margin-top:-32px" alt="form">
+				<p class="text-1">Sign Up</p>
+				<p class="text-2">Privacy policy & Term of service</p>
+			</div>
+			<form class="form-detail" action="{% url 'save_login' %}" method="post" name="my_form" style="height:585px" onsubmit="return myfunction()">
+				{% csrf_token %}
+				<div class="form-row">
+					<label for="username">NAME</label>
+					<input type="text" name="name" id="username" class="input-text">
+				</div>
+				<div class="form-row">
+					<label for="your_email">EMAIL ADDRESS</label>
+					<input type="text" name="email" id="your_email" class="input-text">
+				</div>
+				<div class="form-row">
+					<label for="your_mobile">MOBILE NUMBER</label>
+					<input type="tel" name="mobile" id="your_mobile" class="input-text">
+				</div>
+				<div class="form-row">
+					<label for="password">PASSWORD</label>
+					<input type="password" name="pass" id="password" class="input-text">
+				</div>
+				<div class="form-row">
+					<label for="comfirm_password">CONFIRM PASSWORD</label>
+					<input type="password" name="re_pass" id="comfirm_password" class="input-text">
+				</div>
+				<div class="form-row-last">
+					<input type="submit" name="register" class="register" value="Register">
+					<p>Or<a href="{% url 'sign_in' %}">Sign in</a></p>
+				</div>
+			</form>
+		</div>
+	</div>
+	<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
+	<script>
+		function myfunction(){
+        let name = document.my_form.name.value;
+        let email = document.my_form.email.value;
+        let mobile = document.my_form.mobile.value;
+        let password = document.my_form.pass.value;
+        let re_pass = document.my_form.re_pass.value;
+
+        if(name == "" | name == null){
+            alert("Name Required...!")
+            return false
+        }else if(email == "" | email == null){
+            alert("Email Required...!")
+            return false
+        }else if(mobile == "" | mobile == null){
+            alert("Mobile Number Required...!")
+            return false
+        }else if(password.length < 6){
+            alert("Password must contains atleast 6 characters..!")
+            return false
+        }else if(password != re_pass){
+            alert("Password not match!")
+            return false
+        }
+    }
+	</script>
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+		{% if messages %}
+			{% for i in messages %}
+			   {% if i.tags == 'success' %}
+				   <script>
+					   swal('{{i}}','','success')
+				   </script>
+			   {% elif i.tags == 'error' %}
+				   <script>
+					   swal('{{i}}','','error')
+				   </script>
+			   {% elif i.tags == 'warning' %}
+				   <script>
+					   swal('{{i}}','','warning')
+				   </script>
+			   {% else %}
+				   <script>
+					   swal('{{i}}','','info')
+				   </script>
+			   {% endif %}
+			{% endfor %}
+		{% endif %}
+</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+</html>

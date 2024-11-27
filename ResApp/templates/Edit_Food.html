@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+{% extends 'index.html' %}
+{% block content %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="pd-20 card-box mb-30">
+					<div class="clearfix">
+						<div class="pull-left">
+							<h4 class="text-blue h4">Edit Food Details Here</h4>
+						</div>
+					</div>
+					<form method = "post" action = "{% url 'update_food' data.id %}" enctype="multipart/form-data">
+						{% csrf_token %}
+						<div class="form-group">
+							<label>Food styles</label>
+							<select name="style" class="form-control">
+								<option>{{data.Style}}</option>
+								{% for i in fo %}
+								<option>{{i.Food_Style}}</option>
+								{% endfor %}
+							</select>
+						</div>
+						<div class="form-group">
+							<label>Food Name</label>
+							<input value="{{data.Food_Name}}" name="fname" class="form-control" type="text" placeholder="Food Name">
+						</div>
+						<div class="form-group">
+							<label>Description</label>
+							<textarea name="description" type="text" class="form-control" placeholder="Description">{{data.Food_Description}}</textarea>
+						</div>
+						<div class="form-group">
+							<label>Quantity</label>
+							<input name="quantity" type="text" class="form-control" value="{{data.Quantity}}" placeholder="Quantity">
+						</div>
+						<div class="form-group">
+							<label>MRP</label>
+							<input name="mrp" class="form-control" value="{{data.MRP}}" type="text" placeholder="MRP">
+						</div>
+						<div class="form-group">
+							<label>Image1 :</label>
+							<img src="{{data.Image1.url}}" width="130px" height="130px" style="margin-left:40px;margin-bottom:10px">
+							<input name="img1" type="file" class="form-control-file form-control height-auto">
+						</div>
+						<div class="form-group">
+							<label>Image2 :</label>
+							<img src="{{data.Image2.url}}" width="130px" height="130px" style="margin-left:40px;margin-bottom:10px">
+							<input name="img2" type="file" class="form-control-file form-control height-auto">
+						</div>
+						<div class="mb-3">
+							<button type="submit" class="btn btn-success">Submit</button>
+						</div>
+					</form>
+</div>
+
+</body>
+</html>
+{% endblock %}
